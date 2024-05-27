@@ -1,20 +1,48 @@
-[gd_scene load_steps=6 format=3 uid="uid://tp550tyl32hk"]
+[gd_scene load_steps=12 format=3 uid="uid://tp550tyl32hk"]
 
 [ext_resource type="Script" path="res://sound_waves/lights_shadows/player.gd" id="1_44nw1"]
 [ext_resource type="Texture2D" uid="uid://cuwie667g57rl" path="res://art/2d_lights_and_shadows_neutral_point_light.png" id="2_wyhfu"]
+[ext_resource type="Texture2D" uid="uid://djebd04a4cl25" path="res://art/black.png" id="3_brbv3"]
 [ext_resource type="Texture2D" uid="uid://c3dmsl2nkexr4" path="res://icon.svg" id="3_ei1k1"]
+[ext_resource type="Shader" path="res://sound_waves/lights_shadows/sound_waves.gdshader" id="4_6r4fg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_prdx4"]
 size = Vector2(80, 80)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pwyeh"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_40oyk"]
+noise = SubResource("FastNoiseLite_pwyeh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oqk1s"]
+shader = ExtResource("4_6r4fg")
+shader_parameter/wave_radius = 0.4
+shader_parameter/wave_current_radius = 0.725
+shader_parameter/wave_inner_radius = 0.57
+shader_parameter/wave_origin = Vector2(0, 0)
+shader_parameter/mask = SubResource("NoiseTexture2D_40oyk")
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_364c7"]
 size = Vector2(200, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r4eo6"]
+shader = ExtResource("4_6r4fg")
+shader_parameter/wave_radius = null
+shader_parameter/wave_current_radius = null
+shader_parameter/wave_inner_radius = null
+shader_parameter/wave_origin = null
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_44nw1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_prdx4")
+
+[node name="Screen" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_oqk1s")
+scale = Vector2(7.5, 7.5)
+texture = ExtResource("3_brbv3")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 modulate = Color(0, 1, 0, 1)
@@ -33,15 +61,24 @@ shape = SubResource("RectangleShape2D_364c7")
 
 [node name="Debug" type="CanvasLayer" parent="."]
 
+[node name="ScreenTexDebug" type="TextureRect" parent="Debug"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_r4eo6")
+custom_minimum_size = Vector2(256, 256)
+offset_right = 256.0
+offset_bottom = 256.0
+texture = ExtResource("3_ei1k1")
+expand_mode = 1
+
 [node name="WaveMaskDebug" type="TextureRect" parent="Debug"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(256, 256)
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -194.0
+offset_top = -128.0
 offset_right = 256.0
-offset_bottom = 62.0
+offset_bottom = 128.0
 grow_vertical = 2
 texture = ExtResource("2_wyhfu")
 expand_mode = 1

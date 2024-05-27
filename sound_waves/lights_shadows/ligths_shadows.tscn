@@ -38,23 +38,6 @@ polygon = PackedVector2Array(64, -58.1, 64, 55, 55.7, 64, -56.3, 64, -64, 58, -6
 [node name="ligths_shadows" type="Node2D"]
 script = ExtResource("1_t1112")
 
-[node name="NormalBG" type="Sprite2D" parent="."]
-scale = Vector2(20.36, 20.36)
-texture = ExtResource("1_u0ijd")
-metadata/_edit_lock_ = true
-
-[node name="Player" parent="." node_paths=PackedStringArray("s_v_mask") instance=ExtResource("4_fxn6n")]
-s_v_mask = NodePath("../MaskSubViewport")
-
-[node name="Ground" parent="." instance=ExtResource("7_xr5j8")]
-position = Vector2(-472, 120)
-
-[node name="Ground2" parent="." instance=ExtResource("7_xr5j8")]
-position = Vector2(360, 203)
-
-[node name="MaskSubViewport" parent="." instance=ExtResource("5_p6kvb")]
-unique_name_in_owner = true
-
 [node name="Mask2" type="Node2D" parent="."]
 position = Vector2(-5046, 2124)
 
@@ -160,3 +143,20 @@ texture = ExtResource("1_u0ijd")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="LightV2/Icon2"]
 occluder = SubResource("OccluderPolygon2D_xhtjp")
+
+[node name="NormalBG2" type="Sprite2D" parent="."]
+scale = Vector2(20.36, 20.36)
+texture = ExtResource("1_u0ijd")
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." node_paths=PackedStringArray("s_v_mask") instance=ExtResource("4_fxn6n")]
+s_v_mask = NodePath("../MaskSubViewport")
+
+[node name="Ground" parent="." instance=ExtResource("7_xr5j8")]
+position = Vector2(-472, 120)
+
+[node name="Ground2" parent="." instance=ExtResource("7_xr5j8")]
+position = Vector2(360, 203)
+
+[node name="MaskSubViewport" parent="." instance=ExtResource("5_p6kvb")]
+unique_name_in_owner = true
