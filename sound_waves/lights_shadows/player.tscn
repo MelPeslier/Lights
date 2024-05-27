@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://tp550tyl32hk"]
+
+[ext_resource type="Script" path="res://sound_waves/lights_shadows/player.gd" id="1_44nw1"]
+[ext_resource type="Texture2D" uid="uid://cuwie667g57rl" path="res://art/2d_lights_and_shadows_neutral_point_light.png" id="2_wyhfu"]
+[ext_resource type="Texture2D" uid="uid://c3dmsl2nkexr4" path="res://icon.svg" id="3_ei1k1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_prdx4"]
+size = Vector2(80, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_364c7"]
+size = Vector2(200, 20)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_44nw1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_prdx4")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0, 1)
+scale = Vector2(0.3125, 0.3125)
+texture = ExtResource("2_wyhfu")
+
+[node name="OccludersInside" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionOccluderShape" type="CollisionShape2D" parent="OccludersInside"]
+shape = SubResource("RectangleShape2D_364c7")
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="Debug" type="CanvasLayer" parent="."]
+
+[node name="WaveMaskDebug" type="TextureRect" parent="Debug"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 256)
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -194.0
+offset_right = 256.0
+offset_bottom = 62.0
+grow_vertical = 2
+texture = ExtResource("2_wyhfu")
+expand_mode = 1
+
+[node name="ImageDebug" type="TextureRect" parent="Debug"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(256, 256)
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -256.0
+offset_right = 256.0
+grow_vertical = 0
+texture = ExtResource("3_ei1k1")
+expand_mode = 1

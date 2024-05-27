@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3wfnkevjmktf"]
+
+[ext_resource type="Script" path="res://sound_waves/lights_shadows/mask_sub_viewport.gd" id="1_k5hv4"]
+[ext_resource type="Texture2D" uid="uid://cmnsoye3023ev" path="res://art/white.png" id="2_yobqn"]
+
+[node name="MaskSubViewport" type="SubViewport"]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+script = ExtResource("1_k5hv4")
+
+[node name="BG" type="ColorRect" parent="."]
+unique_name_in_owner = true
+light_mask = 2
+visibility_layer = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PointLight" type="PointLight2D" parent="."]
+unique_name_in_owner = true
+blend_mode = 2
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_item_cull_mask = 2
+texture = ExtResource("2_yobqn")
+texture_scale = 10.0
+
+[node name="Camera" type="Camera2D" parent="."]
+unique_name_in_owner = true

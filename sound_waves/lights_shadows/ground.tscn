@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cna8vlngayfbq"]
+
+[ext_resource type="Script" path="res://sound_waves/lights_shadows/ground.gd" id="1_bn1g4"]
+[ext_resource type="Texture2D" uid="uid://c3dmsl2nkexr4" path="res://icon.svg" id="2_1rr1w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqkov"]
+size = Vector2(128, 128)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_h2uji"]
+polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+
+[node name="StaticBody2D" type="StaticBody2D"]
+collision_layer = 3
+script = ExtResource("1_bn1g4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_1rr1w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yqkov")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+unique_name_in_owner = true
+occluder = SubResource("OccluderPolygon2D_h2uji")
+occluder_light_mask = 2
