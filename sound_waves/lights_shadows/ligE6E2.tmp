@@ -39,8 +39,8 @@ position = Vector2(-5046, 2124)
 [node name="BG" type="Sprite2D" parent="Mask2"]
 light_mask = 2
 visibility_layer = 2
-position = Vector2(420, 23.0001)
-scale = Vector2(4, 4)
+position = Vector2(168, -71.9999)
+scale = Vector2(10, 10)
 texture = ExtResource("3_0adt0")
 
 [node name="PointLight2D" type="PointLight2D" parent="Mask2"]
@@ -55,6 +55,7 @@ texture_scale = 4.0
 
 [node name="Camera2D" type="Camera2D" parent="Mask2/PointLight2D"]
 enabled = false
+zoom = Vector2(2, 2)
 
 [node name="Occluder" type="Sprite2D" parent="Mask2"]
 light_mask = 2
@@ -79,10 +80,10 @@ occluder = SubResource("OccluderPolygon2D_2vyuc")
 occluder_light_mask = 2
 
 [node name="Ground" parent="Mask2" instance=ExtResource("7_xr5j8")]
-position = Vector2(614, -100)
+position = Vector2(615, -94)
 
 [node name="Ground2" parent="Mask2" instance=ExtResource("7_xr5j8")]
-position = Vector2(632, 204)
+position = Vector2(940, 442)
 
 [node name="SDF" type="Node2D" parent="."]
 position = Vector2(5253, 1431)
@@ -151,17 +152,16 @@ occluder = SubResource("OccluderPolygon2D_xhtjp")
 unique_name_in_owner = true
 
 [node name="Player" parent="." node_paths=PackedStringArray("s_v_mask") instance=ExtResource("4_fxn6n")]
-wave_length = 540.0
 s_v_mask = NodePath("../MaskSubViewport")
 
 [node name="Ground" parent="." instance=ExtResource("7_xr5j8")]
-position = Vector2(126, -62)
+position = Vector2(586, 421)
 
 [node name="Ground2" parent="." instance=ExtResource("7_xr5j8")]
-position = Vector2(-9, 109)
+position = Vector2(-385, 866)
 
 [node name="Ground3" parent="." instance=ExtResource("7_xr5j8")]
-position = Vector2(-2, -202)
+position = Vector2(561, 1037)
 
 [node name="Ground4" parent="." instance=ExtResource("7_xr5j8")]
-position = Vector2(-243, -5)
+position = Vector2(-341, 250)

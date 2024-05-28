@@ -6,20 +6,26 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yqkov"]
 size = Vector2(128, 128)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_h2uji"]
-polygon = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tg5jy"]
+polygon = PackedVector2Array(-64, -13, 65, -13, 64, 64, -64, 64)
 
-[node name="StaticBody2D" type="StaticBody2D"]
+[node name="Ground" type="StaticBody2D"]
 collision_layer = 3
 script = ExtResource("1_bn1g4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 2
+visibility_layer = 2
 texture = ExtResource("2_1rr1w")
+flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_yqkov")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 unique_name_in_owner = true
-occluder = SubResource("OccluderPolygon2D_h2uji")
+light_mask = 2
+visibility_layer = 2
+occluder = SubResource("OccluderPolygon2D_tg5jy")
 occluder_light_mask = 2
