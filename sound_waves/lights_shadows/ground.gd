@@ -7,4 +7,3 @@ extends StaticBody2D
 func _ready() -> void:
 	light_occluder_2d.visible = false
 
-

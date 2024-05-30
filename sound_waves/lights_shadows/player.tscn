@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://tp550tyl32hk"]
+[gd_scene load_steps=9 format=3 uid="uid://tp550tyl32hk"]
 
 [ext_resource type="Script" path="res://sound_waves/lights_shadows/player.gd" id="1_44nw1"]
 [ext_resource type="Material" uid="uid://73iihrtxofyc" path="res://sound_waves/lights_shadows/sound_wave_screen.tres" id="2_u002o"]
 [ext_resource type="Texture2D" uid="uid://cuwie667g57rl" path="res://sound_waves/art/2d_lights_and_shadows_neutral_point_light.png" id="2_wyhfu"]
 [ext_resource type="Texture2D" uid="uid://djebd04a4cl25" path="res://sound_waves/art/black.png" id="3_brbv3"]
-[ext_resource type="Texture2D" uid="uid://cmnsoye3023ev" path="res://sound_waves/art/white.png" id="5_5uxiw"]
+[ext_resource type="Script" path="res://sound_waves/lights_shadows/sound_wave.gd" id="5_cs1k0"]
+[ext_resource type="Texture2D" uid="uid://cmnsoye3023ev" path="res://sound_waves/art/white.png" id="6_nsjgp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_prdx4"]
 size = Vector2(80, 80)
@@ -15,10 +16,8 @@ radius = 256.0
 [node name="Player" type="CharacterBody2D"]
 z_index = 50
 script = ExtResource("1_44nw1")
-wave_length = 256.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_prdx4")
 
 [node name="Screen" type="Sprite2D" parent="."]
@@ -150,35 +149,54 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionOccluderShape" type="CollisionShape2D" parent="OccludersInside"]
-visible = false
 shape = SubResource("CircleShape2D_01op6")
 
 [node name="Camera" type="Camera2D" parent="."]
 scale = Vector2(1.29515, 17.018)
 
-[node name="Debug" type="CanvasLayer" parent="."]
-
-[node name="WaveMaskDebug" type="TextureRect" parent="Debug"]
+[node name="SoundWavesNode" type="Node2D" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(256, 256)
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -128.0
-offset_right = 256.0
-offset_bottom = 128.0
-grow_vertical = 2
-texture = ExtResource("5_5uxiw")
-expand_mode = 1
 
-[node name="ImageDebug" type="TextureRect" parent="Debug"]
-unique_name_in_owner = true
+[node name="SoundWave" type="Node2D" parent="SoundWavesNode"]
+script = ExtResource("5_cs1k0")
+travel_time = 1.2
+radius = 350.0
+
+[node name="SoundWave2" type="Node2D" parent="SoundWavesNode"]
+script = ExtResource("5_cs1k0")
+travel_time = 1.3
+color = Color(0.568627, 1, 0.568627, 1)
+radius = 450.0
+
+[node name="SoundWave3" type="Node2D" parent="SoundWavesNode"]
+script = ExtResource("5_cs1k0")
+travel_time = 1.4
+color = Color(1, 1, 0.34902, 1)
+radius = 550.0
+
+[node name="SoundWave4" type="Node2D" parent="SoundWavesNode"]
+script = ExtResource("5_cs1k0")
+travel_time = 1.5
+color = Color(0.611765, 0.137255, 0.231373, 1)
+radius = 650.0
+
+[node name="SoundWave5" type="Node2D" parent="SoundWavesNode"]
+script = ExtResource("5_cs1k0")
+color = Color(1, 0.490196, 0, 1)
+radius = 250.0
+
+[node name="SoundWave6" type="Node2D" parent="SoundWavesNode"]
+script = ExtResource("5_cs1k0")
+travel_time = 2.0
+color = Color(1, 0.478431, 0.988235, 1)
+radius = 850.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Debug texture rect" type="TextureRect" parent="CanvasLayer"]
 custom_minimum_size = Vector2(256, 256)
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -256.0
-offset_right = 256.0
-grow_vertical = 0
-texture = ExtResource("5_5uxiw")
-expand_mode = 1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 266.0
+offset_bottom = 266.0
+texture = ExtResource("6_nsjgp")

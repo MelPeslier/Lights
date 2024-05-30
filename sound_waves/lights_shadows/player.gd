@@ -2,37 +2,42 @@ class_name Player
 extends CharacterBody2D
 
 
-const SPEED = 300.0
+const SPEED : float = 300.0
 
-@export var wave_length : float = 900 :
-	set(_new):
-		wave_length = _new
-		if is_inside_tree():
-			collision_occluder_shape.shape.radius = wave_length
+const WAVES_MAX : int = 10
 
-# TODO : Instantiate via code + only copy in it the light occluders at moment T nothing else
+@export var wave_interval_time : float = 0.5
+var wave_interval_timer : float= 0.0
+
+# TODO : make the screen independant from the player, instantied by player
 @export var s_v_mask : SVMask
+
 
 @onready var occluders_inside: Area2D = %OccludersInside
 @onready var collision_occluder_shape: CollisionShape2D = $OccludersInside/CollisionOccluderShape
-
 @onready var screen: Sprite2D = %Screen
 @onready var screen_mat : ShaderMaterial = screen.material as ShaderMaterial
+@onready var sound_waves_node: Node2D = %SoundWavesNode
 
-@onready var wave_mask_debug: TextureRect = %WaveMaskDebug
-@onready var image_debug: TextureRect = %ImageDebug
 
 var waves : Array[SoundWave]
-var test_wave : SoundWave
+var active_waves : Array[SoundWave]
+var wave_index : int = 0
+
 
 func _ready() -> void:
-	screen.visible = true
-	wave_length = wave_length
-	print(get_viewport_rect().size)
-	await RenderingServer.frame_post_draw
-	update_tex()
+	for i : int in sound_waves_node.get_child_count():
+		waves.push_back(sound_waves_node.get_child(i))
+	if waves.is_empty():
+		push_error(" player.gd : put at least one wave under the designed component")
+	collision_occluder_shape.shape.radius = waves[wave_index].radius
 
-func _physics_process(delta: float) -> void:
+	screen.visible = true
+	await RenderingServer.frame_post_draw
+	update_tex(waves[wave_index].radius)
+
+
+func _physics_process(_delta: float) -> void:
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Vector2(Input.get_axis("left", "right"),Input.get_axis("up", "down")).normalized()
@@ -50,66 +55,89 @@ func _physics_process(delta: float) -> void:
 
 
 func _process(delta: float) -> void:
+	wave_interval_timer = max( wave_interval_timer - delta, 0.0)
 
-	if Input.is_action_just_pressed("use"):
-		var mask := await update_tex()
-		var wave := SoundWave.new(wave_length, global_position, mask)
-		add_child(wave)
-		waves.push_back(wave)
-		wave.finished.connect(_on_wave_finished)
+	if Input.is_action_pressed("use") and is_zero_approx(wave_interval_timer):
+		wave_interval_timer = wave_interval_time
+		if active_waves.size() >= WAVES_MAX:
+			print("too much waves")
+		else:
+			var new_wave : SoundWave = waves[wave_index].duplicate()
+			wave_index = (wave_index +1) % waves.size()
+			add_child(new_wave)
+			active_waves.push_back(new_wave)
+			var mask := await update_tex(new_wave.radius)   
+			new_wave.finished.connect(_on_wave_finished)
+			print(active_waves)
+			new_wave.start(mask)
+			# Prepare for next wave:
+			collision_occluder_shape.shape.radius = waves[wave_index].radius
 
-		test_wave = wave
-		test_wave.start()
+	# Update active waves each frame
+	var wave_colors : Array[Color] = []
+	wave_colors.resize(WAVES_MAX)
 
-	# Update current data between 0 and 1
+	var wave_radius : Array[float] = []
+	wave_radius.resize(WAVES_MAX)
 
-	var wave_origin := Vector2.ZERO
-	var wave_radius : float = 0.0
-	var wave_current_radius : float = 0.0
-	var wave_inner_radius : float = 0.0
-	var mask : Texture = null
+	var wave_outer_line_coefs : Array[float] = []
+	wave_outer_line_coefs.resize(WAVES_MAX)
 
-	var wave_origin_debug := Vector2.ZERO
-	var wave_radius_debug :float = 0.0
+	var wave_origins : Array[Vector2] = []
+	wave_origins.resize(WAVES_MAX)
 
-	if test_wave:
-		# Center the 'global pos' of the screen, so it maps wiht the uv
-		wave_origin = (test_wave.origin - screen.global_position) / (screen.get_rect().size.x * 0.5 * screen.scale.x) # Define compared to the UV
-		wave_radius = test_wave.radius / (screen.get_rect().size.x * 0.5 * screen.scale.x) # Now scaled for the uv
-		#512.0 / 1920.0 = 0.266667
-		#512.0 * 2.0 / 1920.0 = 0.533333
-		#256*2.0 / 1920.0 = 0.266667
+	var wave_current_radius : Array[float] = []
+	wave_current_radius.resize(WAVES_MAX)
 
-		wave_current_radius = test_wave.current_radius
-		wave_inner_radius = test_wave.inner_radius
-		mask = test_wave.mask
+	var wave_inner_radius : Array[float] = []
+	wave_inner_radius.resize(WAVES_MAX)
 
-	screen_mat.set_shader_parameter("wave_origin", wave_origin)
+	var wave_masks : Array[Texture] = []
+	wave_masks.resize(WAVES_MAX)
+
+	if active_waves.is_empty():
+		return
+	# Update arrays to pass
+	for i: int in active_waves.size():
+		var wave : SoundWave = active_waves[i]
+
+		wave_colors[i] = wave.color
+		wave_radius[i] = wave.radius / (screen.get_rect().size.x * 0.5 * screen.scale.x) # Now scaled for the uv
+		wave_outer_line_coefs[i] = wave.wave_outer_line_coef
+		wave_origins[i] = (wave.origin - screen.global_position) / (screen.get_rect().size.x * 0.5 * screen.scale.x) # Define compared to the UV
+		wave_current_radius[i] = wave.current_radius
+		wave_inner_radius[i] = wave.inner_radius
+		wave_masks[i] = wave.mask
+		
+		var mask_name : String = "wave_mask_0" + str(i+1)
+		screen_mat.set_shader_parameter(mask_name, wave_masks[i])
+
+# Pass arrays
+	screen_mat.set_shader_parameter("wave_colors", wave_colors)
 	screen_mat.set_shader_parameter("wave_radius", wave_radius)
+	screen_mat.set_shader_parameter("wave_outer_line_coefs", wave_outer_line_coefs)
+	screen_mat.set_shader_parameter("wave_origins", wave_origins)
 	screen_mat.set_shader_parameter("wave_current_radius", wave_current_radius)
 	screen_mat.set_shader_parameter("wave_inner_radius", wave_inner_radius)
-	screen_mat.set_shader_parameter("mask", mask)
+	screen_mat.set_shader_parameter("actual_array_size", active_waves.size())
 
 
 func _on_wave_finished(_node: SoundWave) -> void:
-	var idx := waves.find(_node)
-	waves[idx].queue_free()
-	waves.remove_at(idx)
-	if waves.is_empty():
-		test_wave = null
-		return
-	test_wave = waves[waves.size()-1]
+	var idx := active_waves.find(_node)
+	active_waves[idx].queue_free()
+	active_waves.remove_at(idx)
 
-func update_tex() -> Texture:
+@onready var debug_texture_rect = $"CanvasLayer/Debug texture rect"
+
+func update_tex(_radius: float) -> Texture:
 	if not s_v_mask :
 		print("no sub viewport")
 		return
-	collision_occluder_shape.shape.radius = wave_length
-	var tex : ViewportTexture = await s_v_mask.get_mask(global_position, wave_length, occluders_inside.get_overlapping_bodies())
-	wave_mask_debug.texture = tex
-
+	#collision_occluder_shape.shape.radius = _radius
+	var tex : ViewportTexture = await s_v_mask.get_mask(global_position, _radius, occluders_inside.get_overlapping_bodies())
 	var image: Image = tex.get_image()
 	var new_tex := ImageTexture.create_from_image(image)
-	image_debug.texture = new_tex
+	print("image created")
+	debug_texture_rect.texture = new_tex
 	return new_tex
 

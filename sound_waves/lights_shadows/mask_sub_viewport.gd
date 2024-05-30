@@ -56,5 +56,4 @@ func get_mask(_origin_pos : Vector2, _wave_radius: float, _occluders: Array[Node
 			add_child(new)
 
 	await RenderingServer.frame_post_draw
-
 	return get_texture()

@@ -20,7 +20,6 @@ texture = ExtResource("2_1rr1w")
 flip_v = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_yqkov")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]

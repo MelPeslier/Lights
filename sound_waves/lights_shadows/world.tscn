@@ -17,6 +17,7 @@ polygon = PackedVector2Array(-64, -13, 65, -13, 64, 64, -64, 64)
 [node name="World" type="Node2D"]
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_left = -2056.0
 offset_top = -3779.0
 offset_right = 6497.0
@@ -32,8 +33,7 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 1, 65536, 0, 65537, 65536, 0, 6553
 [node name="MaskSubViewport" parent="." instance=ExtResource("2_ojlk1")]
 
 [node name="Player" parent="." node_paths=PackedStringArray("s_v_mask") instance=ExtResource("2_nqd0e")]
-position = Vector2(312, 660)
-wave_length = 512.0
+position = Vector2(1174.91, -160.111)
 s_v_mask = NodePath("../MaskSubViewport")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -69,4 +69,4 @@ texture_scale = 11.25
 position = Vector2(142.222, 790.914)
 
 [node name="Ground2" parent="." instance=ExtResource("7_5ei46")]
-position = Vector2(134.671, 469.996)
+position = Vector2(362.741, 518.105)
