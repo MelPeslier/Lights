@@ -23,6 +23,7 @@ shape = SubResource("RectangleShape2D_prdx4")
 
 [node name="Screen" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+visible = false
 material = ExtResource("2_u002o")
 scale = Vector2(7.5, 7.5)
 texture = ExtResource("3_brbv3")
@@ -33,6 +34,7 @@ scale = Vector2(0.3125, 0.3125)
 texture = ExtResource("2_wyhfu")
 
 [node name="Ruler" type="Node2D" parent="."]
+visible = false
 
 [node name="Sprite2" type="Sprite2D" parent="Ruler"]
 modulate = Color(0, 1, 0, 1)
@@ -87,6 +89,7 @@ offset_bottom = 11.0
 text = "1024"
 
 [node name="Ruler2" type="Node2D" parent="."]
+visible = false
 rotation = 1.5708
 
 [node name="Sprite2" type="Sprite2D" parent="Ruler2"]

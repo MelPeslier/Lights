@@ -1,10 +1,19 @@
-[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://73iihrtxofyc"]
+[gd_resource type="ShaderMaterial" load_steps=9 format=3 uid="uid://73iihrtxofyc"]
 
 [ext_resource type="Shader" path="res://sound_waves/lights_shadows/sound_waves.gdshader" id="1_j1x3w"]
 
+[sub_resource type="Gradient" id="Gradient_b5s6y"]
+offsets = PackedFloat32Array(0.911043, 0.957055, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.0184076, 0.0184079, 0.0498964, 1, 0, 0, 0, 1)
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_cwyhp"]
+noise_type = 2
+fractal_octaves = 3
+fractal_weighted_strength = 0.12
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tymvw"]
+seamless = true
+color_ramp = SubResource("Gradient_b5s6y")
 noise = SubResource("FastNoiseLite_cwyhp")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ln7am"]
@@ -23,8 +32,8 @@ noise = SubResource("FastNoiseLite_pwyeh")
 
 [resource]
 shader = ExtResource("1_j1x3w")
-shader_parameter/wave_radius = 0.292
-shader_parameter/wave_outer_line_coef = 0.165
+shader_parameter/wave_radius = 0.365
+shader_parameter/wave_outer_line_coef = 0.07
 shader_parameter/wave_current_radius = 1.0
 shader_parameter/wave_inner_radius = 0.84
 shader_parameter/wave_origin = Vector2(0, 0)
@@ -32,3 +41,5 @@ shader_parameter/wave_color = Color(1, 0.309804, 0, 1)
 shader_parameter/mask = SubResource("NoiseTexture2D_40oyk")
 shader_parameter/inner_noise = SubResource("NoiseTexture2D_ujx31")
 shader_parameter/darkness_noise = SubResource("NoiseTexture2D_tymvw")
+shader_parameter/tex_tiling = 1.0
+shader_parameter/tex_size = Vector2(512, 512)
