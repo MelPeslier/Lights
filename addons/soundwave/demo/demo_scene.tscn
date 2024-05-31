@@ -24,7 +24,6 @@ glow_blend_mode = 0
 [node name="World" type="Node2D"]
 
 [node name="BackGround" type="ColorRect" parent="."]
-visible = false
 offset_left = -2056.0
 offset_top = -3779.0
 offset_right = 6497.0
