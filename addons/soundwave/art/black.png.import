@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuwie667g57rl"
-path="res://.godot/imported/2d_lights_and_shadows_neutral_point_light.png-b340df90fecc0e38d73a4b92a8a8e6ab.ctex"
+uid="uid://djebd04a4cl25"
+path="res://.godot/imported/black.png-7732c445d7db81d1e531bfca4864ffed.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sound_waves/art/2d_lights_and_shadows_neutral_point_light.png"
-dest_files=["res://.godot/imported/2d_lights_and_shadows_neutral_point_light.png-b340df90fecc0e38d73a4b92a8a8e6ab.ctex"]
+source_file="res://addons/soundwave/art/black.png"
+dest_files=["res://.godot/imported/black.png-7732c445d7db81d1e531bfca4864ffed.ctex"]
 
 [params]
 

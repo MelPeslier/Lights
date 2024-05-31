@@ -1,7 +1,7 @@
-class_name SoundWave
+class_name SWWave
 extends Node2D
 
-signal finished(_node: SoundWave)
+signal finished(_node: SWWave)
 
 @export var travel_time : float = 1.0
 
@@ -18,6 +18,7 @@ var mask : Texture
 
 func _ready() -> void:
 	origin = global_position
+	
 
 func start(_mask : Texture) -> void:
 	var tween : Tween = create_tween()

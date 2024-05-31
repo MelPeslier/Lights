@@ -1,0 +1,51 @@
+[gd_resource type="ShaderMaterial" load_steps=11 format=3 uid="uid://73iihrtxofyc"]
+
+[ext_resource type="Shader" path="res://addons/soundwave/sw_screen.gdshader" id="1_vl0n6"]
+
+[sub_resource type="Gradient" id="Gradient_r6ou0"]
+offsets = PackedFloat32Array(0.0816993, 0.130719, 0.183007, 0.879085, 0.918301, 0.957516)
+colors = PackedColorArray(0, 0, 0, 1, 0.13256, 0.13256, 0.13256, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.225352, 0.225352, 0.225352, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ejthq"]
+noise_type = 3
+fractal_type = 2
+fractal_octaves = 1
+fractal_weighted_strength = 0.46
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tdqtd"]
+seamless = true
+color_ramp = SubResource("Gradient_r6ou0")
+noise = SubResource("FastNoiseLite_ejthq")
+
+[sub_resource type="Gradient" id="Gradient_1my6q"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ti3qw"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hmuc2"]
+color_ramp = SubResource("Gradient_1my6q")
+noise = SubResource("FastNoiseLite_ti3qw")
+
+[sub_resource type="Gradient" id="Gradient_nlibs"]
+offsets = PackedFloat32Array(0.767974, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ce2ji"]
+frequency = 0.0015
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vmcix"]
+color_ramp = SubResource("Gradient_nlibs")
+noise = SubResource("FastNoiseLite_ce2ji")
+
+[resource]
+shader = ExtResource("1_vl0n6")
+shader_parameter/wave_colors = PackedVector3Array(1, 0.4, 0.2, 0.2, 0.195, 1)
+shader_parameter/wave_radius = PackedFloat32Array(0.5, 0.625)
+shader_parameter/wave_outer_line_coefs = PackedFloat32Array(0.18, 0.1)
+shader_parameter/wave_origins = PackedVector2Array(-0.095, -0.08, -0.32, 0.28)
+shader_parameter/wave_current_radius = PackedFloat32Array(1, 0.81)
+shader_parameter/wave_inner_radius = PackedFloat32Array(3.195, 0.32)
+shader_parameter/actual_array_size = 10
+shader_parameter/wave_mask_01 = SubResource("NoiseTexture2D_hmuc2")
+shader_parameter/wave_mask_02 = SubResource("NoiseTexture2D_vmcix")
+shader_parameter/tex_tiling = 1.0
+shader_parameter/tex_size = Vector2(512, 512)
+shader_parameter/darkness_noise = SubResource("NoiseTexture2D_tdqtd")

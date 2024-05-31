@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://tp550tyl32hk"]
+
+[ext_resource type="Script" path="res://addons/soundwave/player.gd" id="1_44nw1"]
+[ext_resource type="Texture2D" uid="uid://cuwie667g57rl" path="res://addons/soundwave/art/2d_lights_and_shadows_neutral_point_light.png" id="2_wyhfu"]
+[ext_resource type="Script" path="res://addons/soundwave/sw_wave.gd" id="5_cs1k0"]
+[ext_resource type="Script" path="res://addons/soundwave/sw_manager.gd" id="5_ys3x2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_prdx4"]
+size = Vector2(80, 80)
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 50
+script = ExtResource("1_44nw1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_prdx4")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0, 1)
+scale = Vector2(0.3125, 0.3125)
+texture = ExtResource("2_wyhfu")
+
+[node name="Camera" type="Camera2D" parent="."]
+scale = Vector2(1.29515, 17.018)
+
+[node name="SWManager" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_ys3x2")
+
+[node name="SoundWave" type="Node2D" parent="SWManager"]
+script = ExtResource("5_cs1k0")
+travel_time = 1.2
+radius = 350.0
+
+[node name="SoundWave2" type="Node2D" parent="SWManager"]
+script = ExtResource("5_cs1k0")
+travel_time = 1.3
+color = Color(0.568627, 1, 0.568627, 1)
+radius = 450.0
+
+[node name="SoundWave3" type="Node2D" parent="SWManager"]
+script = ExtResource("5_cs1k0")
+travel_time = 1.4
+color = Color(1, 1, 0.34902, 1)
+radius = 550.0
+
+[node name="SoundWave4" type="Node2D" parent="SWManager"]
+script = ExtResource("5_cs1k0")
+travel_time = 1.5
+color = Color(0.611765, 0.137255, 0.231373, 1)
+radius = 650.0
+
+[node name="SoundWave5" type="Node2D" parent="SWManager"]
+script = ExtResource("5_cs1k0")
+color = Color(1, 0.490196, 0, 1)
+radius = 250.0
+
+[node name="SoundWave6" type="Node2D" parent="SWManager"]
+script = ExtResource("5_cs1k0")
+travel_time = 2.0
+color = Color(1, 0.478431, 0.988235, 1)
+radius = 850.0

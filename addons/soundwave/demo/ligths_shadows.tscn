@@ -1,25 +1,21 @@
-[gd_scene load_steps=18 format=3 uid="uid://ddhv5eekcvwbi"]
+[gd_scene load_steps=16 format=3 uid="uid://ddhv5eekcvwbi"]
 
-[ext_resource type="Script" path="res://sound_waves/lights_shadows/ligths_shadows.gd" id="1_t1112"]
 [ext_resource type="Texture2D" uid="uid://c3dmsl2nkexr4" path="res://icon.svg" id="1_u0ijd"]
-[ext_resource type="Texture2D" uid="uid://cmnsoye3023ev" path="res://art/white.png" id="3_0adt0"]
-[ext_resource type="Texture2D" uid="uid://cuwie667g57rl" path="res://art/2d_lights_and_shadows_neutral_point_light.png" id="4_e5yxg"]
-[ext_resource type="PackedScene" uid="uid://tp550tyl32hk" path="res://sound_waves/lights_shadows/player.tscn" id="4_fxn6n"]
-[ext_resource type="Texture2D" uid="uid://djebd04a4cl25" path="res://art/black.png" id="5_e8jlc"]
-[ext_resource type="PackedScene" uid="uid://d3wfnkevjmktf" path="res://sound_waves/lights_shadows/mask_sub_viewport.tscn" id="5_p6kvb"]
-[ext_resource type="PackedScene" uid="uid://cna8vlngayfbq" path="res://sound_waves/lights_shadows/ground.tscn" id="7_xr5j8"]
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6vn55"]
-light_mode = 1
+[ext_resource type="Texture2D" uid="uid://cmnsoye3023ev" path="res://addons/soundwave/art/white.png" id="3_0adt0"]
+[ext_resource type="Texture2D" uid="uid://cuwie667g57rl" path="res://addons/soundwave/art/2d_lights_and_shadows_neutral_point_light.png" id="4_e5yxg"]
+[ext_resource type="PackedScene" uid="uid://tp550tyl32hk" path="res://addons/soundwave/demo/player.tscn" id="4_fxn6n"]
+[ext_resource type="Texture2D" uid="uid://djebd04a4cl25" path="res://addons/soundwave/art/black.png" id="5_e8jlc"]
+[ext_resource type="PackedScene" uid="uid://d3wfnkevjmktf" path="res://addons/soundwave/sw_mask_baker.tscn" id="5_p6kvb"]
+[ext_resource type="PackedScene" uid="uid://cna8vlngayfbq" path="res://addons/soundwave/sw_occluders/ground.tscn" id="7_xr5j8"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yw2qm"]
-polygon = PackedVector2Array(64, -64, 64, 64, -64, 64, -64, -64)
+polygon = PackedVector2Array(24, -62, 29, 68, -64, 64, -64, -64)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_8j1nf"]
-blend_mode = 2
+light_mode = 2
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2vyuc"]
-polygon = PackedVector2Array(64, -64, 64, 64, -64, 64, -64, -64)
+polygon = PackedVector2Array(58, -24, 64, 64, -64, 64, -60, -29)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nq377"]
 polygon = PackedVector2Array(64, -58.1, 64, 55, 55.7, 64, -56.3, 64, -64, 58, -64, 55, -64, -55.1, -58.1, -64, -55.5, -64, 55.1, -64)
@@ -36,52 +32,6 @@ polygon = PackedVector2Array(64, -58.1, 64, 55, 55.7, 64, -56.3, 64, -64, 58, -6
 polygon = PackedVector2Array(64, -58.1, 64, 55, 55.7, 64, -56.3, 64, -64, 58, -64, 55, -64, -55.1, -58.1, -64, -55.5, -64, 55.1, -64)
 
 [node name="ligths_shadows" type="Node2D"]
-script = ExtResource("1_t1112")
-
-[node name="NormalBG" type="Sprite2D" parent="."]
-scale = Vector2(20.36, 20.36)
-texture = ExtResource("1_u0ijd")
-metadata/_edit_lock_ = true
-
-[node name="Player" parent="." node_paths=PackedStringArray("s_v_mask") instance=ExtResource("4_fxn6n")]
-wave_length = 1920.0
-s_v_mask = NodePath("../MaskSubViewport")
-
-[node name="Ground" parent="." instance=ExtResource("7_xr5j8")]
-position = Vector2(-377, 393)
-
-[node name="Ground2" parent="." instance=ExtResource("7_xr5j8")]
-position = Vector2(-107, 552)
-
-[node name="Ground3" parent="." instance=ExtResource("7_xr5j8")]
-position = Vector2(202, 711)
-
-[node name="Ground4" parent="." instance=ExtResource("7_xr5j8")]
-position = Vector2(669, 627)
-
-[node name="Ground5" parent="." instance=ExtResource("7_xr5j8")]
-position = Vector2(843, 294)
-
-[node name="Ground6" parent="." instance=ExtResource("7_xr5j8")]
-position = Vector2(570, -147)
-
-[node name="Ground7" parent="." instance=ExtResource("7_xr5j8")]
-position = Vector2(-44, -288)
-
-[node name="Ground8" parent="." instance=ExtResource("7_xr5j8")]
-position = Vector2(-395, -138)
-
-[node name="Ground9" parent="." instance=ExtResource("7_xr5j8")]
-position = Vector2(-512, 78)
-
-[node name="Ground10" parent="." instance=ExtResource("7_xr5j8")]
-position = Vector2(202, 162)
-
-[node name="Ground11" parent="." instance=ExtResource("7_xr5j8")]
-position = Vector2(-143, 189)
-
-[node name="MaskSubViewport" parent="." instance=ExtResource("5_p6kvb")]
-unique_name_in_owner = true
 
 [node name="Mask2" type="Node2D" parent="."]
 position = Vector2(-5046, 2124)
@@ -89,24 +39,28 @@ position = Vector2(-5046, 2124)
 [node name="BG" type="Sprite2D" parent="Mask2"]
 light_mask = 2
 visibility_layer = 2
-position = Vector2(168, -71.9999)
-scale = Vector2(10, 10)
+z_index = 2
+z_as_relative = false
+position = Vector2(420, 23.0001)
+scale = Vector2(4, 4)
 texture = ExtResource("3_0adt0")
 
 [node name="PointLight2D" type="PointLight2D" parent="Mask2"]
-position = Vector2(40, 0)
+position = Vector2(427, 85)
 blend_mode = 2
 range_item_cull_mask = 2
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
 shadow_item_cull_mask = 2
 texture = ExtResource("3_0adt0")
-texture_scale = 10.0
+texture_scale = 4.0
+
+[node name="Camera2D" type="Camera2D" parent="Mask2/PointLight2D"]
+enabled = false
 
 [node name="Occluder" type="Sprite2D" parent="Mask2"]
 light_mask = 2
 visibility_layer = 2
-material = SubResource("CanvasItemMaterial_6vn55")
 position = Vector2(240, 168)
 texture = ExtResource("1_u0ijd")
 
@@ -125,6 +79,13 @@ texture = ExtResource("1_u0ijd")
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Mask2/Occluder2"]
 occluder = SubResource("OccluderPolygon2D_2vyuc")
 occluder_light_mask = 2
+
+[node name="Ground" parent="Mask2" instance=ExtResource("7_xr5j8")]
+position = Vector2(614, -100)
+
+[node name="Ground2" parent="Mask2" instance=ExtResource("7_xr5j8")]
+z_as_relative = false
+position = Vector2(632, 204)
 
 [node name="SDF" type="Node2D" parent="."]
 position = Vector2(5253, 1431)
@@ -188,3 +149,22 @@ texture = ExtResource("1_u0ijd")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="LightV2/Icon2"]
 occluder = SubResource("OccluderPolygon2D_xhtjp")
+
+[node name="MaskSubViewport" parent="." instance=ExtResource("5_p6kvb")]
+unique_name_in_owner = true
+
+[node name="Ground" parent="." instance=ExtResource("7_xr5j8")]
+position = Vector2(126, -62)
+
+[node name="Ground2" parent="." instance=ExtResource("7_xr5j8")]
+position = Vector2(-9, 109)
+
+[node name="Ground3" parent="." instance=ExtResource("7_xr5j8")]
+position = Vector2(-2, -202)
+
+[node name="Ground4" parent="." instance=ExtResource("7_xr5j8")]
+position = Vector2(-243, -5)
+
+[node name="Player" parent="." node_paths=PackedStringArray("s_v_mask") instance=ExtResource("4_fxn6n")]
+position = Vector2(-19, -12)
+s_v_mask = NodePath("../MaskSubViewport")

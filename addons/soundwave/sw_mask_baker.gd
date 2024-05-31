@@ -1,4 +1,4 @@
-class_name SVMask
+class_name SWMaskBaker
 extends SubViewport
 
 @onready var point_light: PointLight2D = %PointLight
@@ -11,8 +11,15 @@ var local_tile_maps : Array[TileMap] = []
 # TODO : Duplicating may cost  performances ? so how can we do it differently ? (#Not makng a mask in a subviewport ?)
 # TODO : Reduce the time of the process by not awaiting, but just calling the function, then let it call an other funciton once it has finished
 
+func _ready() -> void:
+	SWSignal.sw_mask_baker_ready.emit(self)
+	await RenderingServer.frame_post_draw
+	get_mask(Vector2.ZERO, 512.0, [])
+
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func get_mask(_origin_pos : Vector2, _wave_radius: float, _occluders: Array[Node2D]) -> ViewportTexture:
+func get_mask(_origin_pos : Vector2, _wave_radius: float, _occluders: Array[Node2D]) -> ImageTexture:
 	# Updating positions 'center on the wave emission point'
 	camera.position = _origin_pos
 	point_light.position = _origin_pos
@@ -26,7 +33,6 @@ func get_mask(_origin_pos : Vector2, _wave_radius: float, _occluders: Array[Node
 
 	# Most important part, so we actually see the whole thing !
 	camera.zoom = Vector2.ONE / scale_coef
-
 
 	# Remove local light occluders before re adding new ones
 	for occl: LightOccluder2D in local_occluders:
@@ -49,10 +55,15 @@ func get_mask(_origin_pos : Vector2, _wave_radius: float, _occluders: Array[Node
 			occl.occluder_light_mask = to_copy.occluder_light_mask
 			occl.occluder = to_copy.occluder
 			occl.visible = true
-		elif _actual is TileMap:
+		elif _actual is TileMap: # TODO find a way to not suplicatethe tile map ? Is it costly ?
 			var new : TileMap = _actual.duplicate()
 			local_tile_maps.push_back(new)
 			add_child(new)
-
+		
+		# TODO Add you  own ligic for other types that are in the light layer 2 to add the maked part that we need:)
+		
 	await RenderingServer.frame_post_draw
-	return get_texture()
+	var viewport_texture : ViewportTexture = get_texture()
+	var image: Image = viewport_texture.get_image()
+	var image_texture := ImageTexture.create_from_image(image)
+	return image_texture

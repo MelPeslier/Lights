@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://d3wfnkevjmktf"]
 
-[ext_resource type="Script" path="res://sound_waves/lights_shadows/mask_sub_viewport.gd" id="1_k5hv4"]
-[ext_resource type="Texture2D" uid="uid://cmnsoye3023ev" path="res://sound_waves/art/white.png" id="2_yobqn"]
+[ext_resource type="Script" path="res://addons/soundwave/sw_mask_baker.gd" id="1_k5hv4"]
+[ext_resource type="Texture2D" uid="uid://cmnsoye3023ev" path="res://addons/soundwave/art/white.png" id="2_yobqn"]
 
-[node name="MaskSubViewport" type="SubViewport"]
+[node name="SWMaskBaker" type="SubViewport"]
 handle_input_locally = false
 render_target_update_mode = 4
 script = ExtResource("1_k5hv4")
@@ -12,7 +12,7 @@ script = ExtResource("1_k5hv4")
 unique_name_in_owner = true
 light_mask = 2
 visibility_layer = 2
-z_index = 1
+z_index = 2
 texture_repeat = 2
 texture = ExtResource("2_yobqn")
 

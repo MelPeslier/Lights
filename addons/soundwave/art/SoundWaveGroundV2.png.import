@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dk5afr8j7y80t"
-path="res://.godot/imported/SoundWaveGroundV1.png-3a2c838dadbcec79c95f437b72555822.ctex"
+uid="uid://cbivjlbtyhux"
+path="res://.godot/imported/SoundWaveGroundV2.png-6188a8890edbece8d81ec8a4a4188d6d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sound_waves/art/SoundWaveGroundV1.png"
-dest_files=["res://.godot/imported/SoundWaveGroundV1.png-3a2c838dadbcec79c95f437b72555822.ctex"]
+source_file="res://addons/soundwave/art/SoundWaveGroundV2.png"
+dest_files=["res://.godot/imported/SoundWaveGroundV2.png-6188a8890edbece8d81ec8a4a4188d6d.ctex"]
 
 [params]
 

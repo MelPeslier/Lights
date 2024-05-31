@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=29 format=3 uid="uid://b6dn3h4jfx6fk"]
 
-[ext_resource type="Texture2D" uid="uid://dk5afr8j7y80t" path="res://sound_waves/art/SoundWaveGroundV1.png" id="1_m46yu"]
-[ext_resource type="Texture2D" uid="uid://cbivjlbtyhux" path="res://sound_waves/art/SoundWaveGroundV2.png" id="2_bpu0r"]
+[ext_resource type="Texture2D" uid="uid://dk5afr8j7y80t" path="res://addons/soundwave/art/SoundWaveGroundV1.png" id="1_m46yu"]
+[ext_resource type="Texture2D" uid="uid://cbivjlbtyhux" path="res://addons/soundwave/art/SoundWaveGroundV2.png" id="2_bpu0r"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tm6ma"]
 polygon = PackedVector2Array(64, -64, 64, 64, -27.4286, 64, -27.4286, -64)
