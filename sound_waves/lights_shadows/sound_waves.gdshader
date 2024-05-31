@@ -12,16 +12,16 @@ uniform float[WAVES_MAX] wave_inner_radius;
 
 uniform int actual_array_size = 1;
 
-uniform sampler2D wave_mask_01;
-uniform sampler2D wave_mask_02;
-uniform sampler2D wave_mask_03;
-uniform sampler2D wave_mask_04;
-uniform sampler2D wave_mask_05;
-uniform sampler2D wave_mask_06;
-uniform sampler2D wave_mask_07;
-uniform sampler2D wave_mask_08;
-uniform sampler2D wave_mask_09;
-uniform sampler2D wave_mask_10;
+uniform sampler2D wave_mask_01 : hint_default_black;
+uniform sampler2D wave_mask_02 : hint_default_black;
+uniform sampler2D wave_mask_03 : hint_default_black;
+uniform sampler2D wave_mask_04 : hint_default_black;
+uniform sampler2D wave_mask_05 : hint_default_black;
+uniform sampler2D wave_mask_06 : hint_default_black;
+uniform sampler2D wave_mask_07 : hint_default_black;
+uniform sampler2D wave_mask_08 : hint_default_black;
+uniform sampler2D wave_mask_09 : hint_default_black;
+uniform sampler2D wave_mask_10 : hint_default_black;
 
 
 //group_uniforms More;

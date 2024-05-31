@@ -10,12 +10,15 @@ size = Vector2(128, 128)
 polygon = PackedVector2Array(-64, -13, 65, -13, 64, 64, -64, 64)
 
 [node name="Ground" type="StaticBody2D"]
+light_mask = 2
+visibility_layer = 2
 collision_layer = 3
 script = ExtResource("1_bn1g4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 light_mask = 2
 visibility_layer = 2
+z_index = 1
 texture = ExtResource("2_1rr1w")
 flip_v = true
 

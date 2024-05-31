@@ -68,7 +68,6 @@ func _process(delta: float) -> void:
 			active_waves.push_back(new_wave)
 			var mask := await update_tex(new_wave.radius)   
 			new_wave.finished.connect(_on_wave_finished)
-			print(active_waves)
 			new_wave.start(mask)
 			# Prepare for next wave:
 			collision_occluder_shape.shape.radius = waves[wave_index].radius
@@ -127,7 +126,7 @@ func _on_wave_finished(_node: SoundWave) -> void:
 	active_waves[idx].queue_free()
 	active_waves.remove_at(idx)
 
-@onready var debug_texture_rect = $"CanvasLayer/Debug texture rect"
+
 
 func update_tex(_radius: float) -> Texture:
 	if not s_v_mask :
@@ -137,7 +136,5 @@ func update_tex(_radius: float) -> Texture:
 	var tex : ViewportTexture = await s_v_mask.get_mask(global_position, _radius, occluders_inside.get_overlapping_bodies())
 	var image: Image = tex.get_image()
 	var new_tex := ImageTexture.create_from_image(image)
-	print("image created")
-	debug_texture_rect.texture = new_tex
 	return new_tex
 

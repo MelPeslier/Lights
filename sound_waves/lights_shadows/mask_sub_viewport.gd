@@ -20,7 +20,6 @@ func get_mask(_origin_pos : Vector2, _wave_radius: float, _occluders: Array[Node
 
 	# Resizing the textures size to fit the radius of the wave (scalable for any size of lights)
 	# 256.0 is the texture size of light and background
-	# TODO test with * 4.0
 	var scale_coef : float = _wave_radius / 256.0
 	point_light.texture_scale = scale_coef * 2.0
 	bg.scale = scale_coef * Vector2.ONE * 2.0
