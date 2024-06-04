@@ -1,0 +1,193 @@
+[gd_scene load_steps=20 format=3 uid="uid://h5ep5irye428"]
+
+[ext_resource type="Texture2D" uid="uid://cbxu78ma60kv5" path="res://abstract-neon-lights-background.png" id="1_x0s5b"]
+[ext_resource type="Texture2D" uid="uid://c3dmsl2nkexr4" path="res://icon.svg" id="2_iflhg"]
+[ext_resource type="Texture2D" uid="uid://djebd04a4cl25" path="res://addons/soundwave/art/black.png" id="3_mp6tb"]
+[ext_resource type="Texture2D" uid="uid://cmnsoye3023ev" path="res://addons/soundwave/art/white.png" id="4_tbqn4"]
+[ext_resource type="TileSet" uid="uid://b6dn3h4jfx6fk" path="res://addons/soundwave/tileset.tres" id="5_jug38"]
+[ext_resource type="Shader" path="res://addons/soundwave/test_2/sw_light.gdshader" id="6_emv5h"]
+[ext_resource type="Script" path="res://addons/soundwave/test_2/viewport_baking_permanently.gd" id="7_j6cf5"]
+[ext_resource type="Shader" path="res://addons/soundwave/test_2/test_get_world_sdfs.gdshader" id="7_v0nbx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u7tnh"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_aumxj"]
+polygon = PackedVector2Array(-56, -56, 56, -56, 56, 56, -56, 56)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fgp74"]
+viewport_path = NodePath("LightUsingViewport/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_temlj"]
+shader = ExtResource("6_emv5h")
+shader_parameter/wave_radius = 0.745
+shader_parameter/wave_outer_line_coefs = 0.05
+shader_parameter/wave_current_radius = 0.975
+shader_parameter/wave_inner_radius = 0.05
+
+[sub_resource type="Gradient" id="Gradient_dngxi"]
+offsets = PackedFloat32Array(0, 0.83432, 0.89645, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.310617, 0.310617, 0.310617, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_poto7"]
+gradient = SubResource("Gradient_dngxi")
+width = 256
+height = 256
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Environment" id="Environment_a03oh"]
+background_mode = 3
+glow_strength = 1.43
+glow_blend_mode = 0
+glow_hdr_threshold = 1.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jigiy"]
+shader = ExtResource("7_v0nbx")
+shader_parameter/_aim = 0.0024
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4x4aw"]
+polygon = PackedVector2Array(-392, -5, -567, 191, -679, -257, -949, 130, -1156, -195, -920, -224, -840, -410, -564, -476, -457, -262, -255, -113)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_axfa1"]
+shader = ExtResource("6_emv5h")
+shader_parameter/wave_radius = 1.0
+shader_parameter/wave_outer_line_coefs = 0.05
+shader_parameter/wave_current_radius = 1.0
+shader_parameter/wave_inner_radius = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oxyby"]
+shader = ExtResource("6_emv5h")
+shader_parameter/wave_radius = 1.0
+shader_parameter/wave_outer_line_coefs = 0.05
+shader_parameter/wave_current_radius = 1.0
+shader_parameter/wave_inner_radius = 0.2
+
+[node name="Test2" type="Node2D"]
+position = Vector2(939, 486)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+material = SubResource("ShaderMaterial_u7tnh")
+color = Color(0.137255, 0.137255, 0.137255, 1)
+
+[node name="BGImage" type="Sprite2D" parent="."]
+scale = Vector2(4.335, 4.335)
+texture = ExtResource("1_x0s5b")
+metadata/_edit_lock_ = true
+
+[node name="BGGodot" type="Sprite2D" parent="."]
+position = Vector2(-2.99994, 5)
+scale = Vector2(12.33, 12.33)
+texture = ExtResource("2_iflhg")
+metadata/_edit_lock_ = true
+
+[node name="BGBlack" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-2.99994, 5)
+scale = Vector2(7, 7)
+texture = ExtResource("3_mp6tb")
+metadata/_edit_lock_ = true
+
+[node name="BGWhite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-2.99994, 5)
+scale = Vector2(7, 7)
+texture = ExtResource("4_tbqn4")
+metadata/_edit_lock_ = true
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("5_jug38")
+format = 2
+layer_0/tile_data = PackedInt32Array(196605, 65538, 131073, 196606, 2, 65536, 196607, 2, 65536, 131072, 2, 65536, 131073, 2, 65536, 131074, 65538, 196609, 262141, 65538, 65537, 262142, 2, 196608, 262143, 2, 196608, 196608, 2, 196608, 196609, 2, 196608, 196610, 65538, 1, -196610, 65538, 131073, -196609, 2, 65536, -262144, 2, 65536, -262143, 2, 65536, -262142, 65538, 196609, -196606, 65538, 1, -196607, 2, 196608, -196608, 2, 196608, -131073, 2, 196608, -131074, 65538, 65537)
+
+[node name="Occluder" type="Sprite2D" parent="."]
+position = Vector2(125, -21)
+texture = ExtResource("2_iflhg")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Occluder"]
+occluder = SubResource("OccluderPolygon2D_aumxj")
+
+[node name="CanvasGroup" type="CanvasGroup" parent="."]
+clip_children = 1
+light_mask = 3
+position = Vector2(-578, -588)
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasGroup"]
+self_modulate = Color(0.839216, 0.2, 0.427451, 1)
+position = Vector2(800, 1214)
+texture = ExtResource("4_tbqn4")
+
+[node name="LightUsingViewport" type="PointLight2D" parent="." node_paths=PackedStringArray("vp")]
+position = Vector2(518, -303)
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_item_cull_mask = 3
+texture = SubResource("ViewportTexture_fgp74")
+texture_scale = 3.0
+script = ExtResource("7_j6cf5")
+vp = NodePath("SubViewport")
+
+[node name="SubViewport" type="SubViewport" parent="LightUsingViewport"]
+size = Vector2i(256, 256)
+render_target_update_mode = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="LightUsingViewport/SubViewport"]
+material = SubResource("ShaderMaterial_temlj")
+texture = ExtResource("4_tbqn4")
+centered = false
+
+[node name="Test gradient" type="PointLight2D" parent="."]
+position = Vector2(-34, 83)
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_poto7")
+texture_scale = 3.0
+
+[node name="SquareFullLight3" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(-602, -393)
+color = Color(0.168627, 0.411765, 0.792157, 1)
+shadow_enabled = true
+shadow_filter_smooth = 0.3
+shadow_item_cull_mask = 3
+texture = ExtResource("4_tbqn4")
+texture_scale = 14.87
+
+[node name="SquareFullLight" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(251, 239)
+color = Color(0.0980392, 0.509804, 0.133333, 1)
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_item_cull_mask = 3
+texture = ExtResource("4_tbqn4")
+texture_scale = 18.72
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_a03oh")
+
+[node name="SDF tests" type="Sprite2D" parent="."]
+visible = false
+light_mask = 0
+material = SubResource("ShaderMaterial_jigiy")
+position = Vector2(158, 34)
+scale = Vector2(18.8043, 14.5538)
+texture = ExtResource("2_iflhg")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(1605, 69)
+occluder = SubResource("OccluderPolygon2D_4x4aw")
+
+[node name="Icon" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_axfa1")
+position = Vector2(875, 246)
+texture = ExtResource("4_tbqn4")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+material = SubResource("ShaderMaterial_oxyby")
+position = Vector2(605, 245)
+shadow_enabled = true
+shadow_item_cull_mask = 3
+texture = ExtResource("4_tbqn4")

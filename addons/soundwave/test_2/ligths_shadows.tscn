@@ -165,6 +165,5 @@ position = Vector2(-2, -202)
 [node name="Ground4" parent="." instance=ExtResource("7_xr5j8")]
 position = Vector2(-243, -5)
 
-[node name="Player" parent="." node_paths=PackedStringArray("s_v_mask") instance=ExtResource("4_fxn6n")]
+[node name="Player" parent="." instance=ExtResource("4_fxn6n")]
 position = Vector2(-19, -12)
-s_v_mask = NodePath("../MaskSubViewport")
